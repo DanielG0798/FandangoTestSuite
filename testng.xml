@@ -1,0 +1,26 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Fandango Test Suite" parallel="classes" thread-count="2">
+    <test name="Home Page Tests">
+        <classes>
+            <class name="tests.HomeTests"/>
+        </classes>
+    </test>
+
+    <test name="Search Tests">
+        <classes>
+            <class name="tests.SearchTests"/>
+        </classes>
+    </test>
+
+    <test name="Movie Tests">
+        <classes>
+            <class name="tests.MovieTests"/>
+        </classes>
+    </test>
+
+    <test name="Theater Tests">
+        <classes>
+            <class name="tests.TheaterTests"/>
+        </classes>
+    </test>
+</suite>
