@@ -38,10 +38,11 @@ public class TheaterTests extends BaseTest {
     }
 
     @Test
-    public void verifyShowtimeFiltering() {
+    public void verifyShowtimeFiltering() throws InterruptedException {
         driver.get(MOVIE_URL);
         TheaterPage theaterPage = new TheaterPage(driver);
         String selectedBefore = theaterPage.getSelectedDateLabel();
+        Thread.sleep(3000);
 
         Assert.assertTrue(theaterPage.filterByShowtime("Wednesday"),
                 "Selecting a different showtime day should be handled successfully.");

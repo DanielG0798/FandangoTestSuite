@@ -130,21 +130,18 @@ public class BaseTest {
         return Optional.empty();
     }
 
-    protected boolean clickIfPresent(By... locators) {
+    protected void clickIfPresent(By... locators) {
         Optional<WebElement> element = findVisibleElement(locators);
         if (element.isEmpty()) {
-            return false;
+            return;
         }
 
         try {
             wait.until(ExpectedConditions.elementToBeClickable(element.get())).click();
-            return true;
         } catch (Exception ignored) {
             try {
                 ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element.get());
-                return true;
             } catch (Exception ignoredAgain) {
-                return false;
             }
         }
     }
@@ -199,9 +196,10 @@ public class BaseTest {
             Alert alert = driver.switchTo().alert();
             alert.dismiss();
         } catch (NoAlertPresentException ignored) {
-            // No browser alert is present.
+            System.out.println("No alert present.");
         } catch (Exception ignored) {
-            // Some sites block alert access during navigation; it is safe to ignore here.
+            System.out.println("Error dismissing alert.");
+            // Some sites block alert access during navigation
         }
     }
 }

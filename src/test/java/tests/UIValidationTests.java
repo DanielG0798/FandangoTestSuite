@@ -7,7 +7,6 @@ import pages.UIValidationPage;
 
 public class UIValidationTests extends BaseTest {
 
-    // ── verifyFontsAndColors ──────────────────────────────────────────────────────
     /**
      * Reads the computed CSS font-family and background-color of the page body
      * and asserts that both are non-empty / non-default values, confirming that
@@ -34,7 +33,6 @@ public class UIValidationTests extends BaseTest {
         );
     }
 
-    // ── verifyResponsiveLayout ────────────────────────────────────────────────────
     /**
      * Resizes the browser to a typical mobile viewport (390 × 844) and
      * confirms that the page body width does not overflow horizontally,
@@ -59,7 +57,6 @@ public class UIValidationTests extends BaseTest {
         }
     }
 
-    // ── verifyButtonsClickable ────────────────────────────────────────────────────
     /**
      * Counts the number of visible, enabled buttons on the home page and
      * asserts there is at least one — confirming that interactive controls
@@ -80,7 +77,6 @@ public class UIValidationTests extends BaseTest {
         System.out.println("[INFO] Clickable button count: " + clickableCount);
     }
 
-    // ── verifyImagesLoad ──────────────────────────────────────────────────────────
     /**
      * Checks every {@code <img>} element on the page and counts those whose
      * {@code naturalWidth} is 0 (i.e. failed to load). The test asserts that
@@ -104,7 +100,6 @@ public class UIValidationTests extends BaseTest {
         );
     }
 
-    // ── verifyNoBrokenLinks ────────────────────────────────────────────────────────
     /**
      * Scans every anchor tag on the page for obviously invalid hrefs (empty,
      * "#", or "javascript:void(0)") and asserts that none are found on visible,
@@ -112,9 +107,6 @@ public class UIValidationTests extends BaseTest {
      * Pass: no anchor tags with meaningful link text have an obviously
      *       broken/placeholder href.
      * Fail: one or more visible links point to "#" or equivalent.
-     * Note: this test performs a DOM-only check and does not make HTTP
-     * requests. It catches placeholder links that were never wired up, not
-     * server-side 404s.
      */
     @Test
     public void verifyNoBrokenLinks() {

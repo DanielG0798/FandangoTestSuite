@@ -11,13 +11,14 @@ public class CheckoutTests extends BaseTest {
     private static final String GUEST_EMAIL = "test.guest@example.com";
 
     @Test
-    public void selectSeats() {
+    public void selectSeats() throws InterruptedException {
         CheckoutPage checkout = new CheckoutPage(driver);
 
         checkout.selectFirstTheater();
         checkout.selectFirstValidShowDate();
         checkout.selectFirstValidShowTime();
         checkout.selectFirstAvailableSeat();
+        Thread.sleep(2000);
 
         Assert.assertTrue(
                 checkout.isSeatSelected(),

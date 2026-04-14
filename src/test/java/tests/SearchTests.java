@@ -44,9 +44,11 @@ public class SearchTests extends BaseTest {
     }
 
     @Test
-    public void verifyAutoSuggestions() {
+    public void verifyAutoSuggestions() throws InterruptedException {
         HomePage homePage = new HomePage(driver);
         homePage.enterSearchQuery("Mari");
+        Thread.sleep(3000);
+
 
         SearchPage searchPage = new SearchPage(driver);
         List<String> suggestions = searchPage.getAutoSuggestions();

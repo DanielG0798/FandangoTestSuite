@@ -11,22 +11,6 @@ public class CheckoutPage {
     private final WebDriverWait wait;
     private final WebDriverWait longWait;
 
-    private final By[] theaterLocators = new By[] {
-            By.xpath("//a[contains(@href,'theater')]"),
-            By.xpath("//button[contains(text(),'AMC') or contains(text(),'Regal') or contains(text(),'Cinemark')]"),
-            By.xpath("//div[contains(text(),'Theater') or contains(text(),'Cinema')]")
-    };
-
-    private final By[] showDateLocators = new By[] {
-            By.cssSelector("#splide02-slide03 > button"),
-            By.id("splide06-slide03")
-    };
-
-    private final By[] showTimeLocators = new By[] {
-            By.className("showtime-btn--available"),
-            By.cssSelector("#shared-showtimes-244726 > section > ol > li:nth-child(2) > a")
-    };
-
     // Step 1 of checkout navigation: the "Next" button on the seat-map overlay
     private final By nextButtonLocator = By.id("NextButton");
 
@@ -38,6 +22,26 @@ public class CheckoutPage {
 
     // Step 3b: "Continue to Checkout" button shown when the modal is absent
     private final By continueToCheckoutBtn = By.id("buynow-continue-btn");
+
+    private final By[] theaterLocators = new By[] {
+            By.xpath("//a[contains(@href,'theater')]"),
+
+            By.xpath("//button[contains(text(),'AMC') or " +
+                    "contains(text(),'Regal') or contains(text(),'Cinemark')]"),
+
+            By.xpath("//div[contains(text(),'Theater') or " +
+                    "contains(text(),'Cinema')]")
+    };
+
+    private final By[] showDateLocators = new By[] {
+            By.cssSelector("#splide02-slide03 > button"),
+            By.id("splide06-slide03")
+    };
+
+    private final By[] showTimeLocators = new By[] {
+            By.className("showtime-btn--available"),
+            By.cssSelector("#shared-showtimes-244726 > section > ol > li:nth-child(2) > a")
+    };
 
     private final By[] orderSummaryLocators = new By[] {
             By.xpath("//*[contains(normalize-space(),'Order Summary')]"),
@@ -336,8 +340,6 @@ public class CheckoutPage {
         }
     }
 
-    // ── Payment form ──────────────────────────────────────────────────────────────
-
     /**
      * Returns true only when actual payment input fields are visible.
      * BUG FIX: generic By.cssSelector("form") removed — it matched on every page
@@ -346,8 +348,6 @@ public class CheckoutPage {
     public boolean isPaymentFormDisplayed() {
         return isAnyElementVisible(paymentFormLocators);
     }
-
-    // ── Order summary / price ────────────────────────────────────────────────────
 
     public boolean isOrderSummaryDisplayed() {
         return isAnyElementVisible(orderSummaryLocators);
