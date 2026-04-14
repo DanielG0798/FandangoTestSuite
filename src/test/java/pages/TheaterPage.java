@@ -140,7 +140,8 @@ public class TheaterPage {
     }
 
     public String getSelectedDateLabel() {
-        By selectedLocator = By.xpath("//button[@aria-selected='true' or @aria-pressed='true' or contains(@aria-label,'selected') or contains(@class,'selected')]");
+        By selectedLocator = By.xpath("//button[@aria-selected='true' or @aria-pressed='true' or " +
+                "contains(@aria-label,'selected') or contains(@class,'selected')]");
         for (WebElement element : driver.findElements(selectedLocator)) {
             try {
                 if (!element.isDisplayed()) {
