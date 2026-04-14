@@ -152,4 +152,21 @@ public class NavigationTests extends BaseTest {
                 "Page title after refresh does not contain 'Fandango': '" + titleAfterRefresh + "'"
         );
     }
+    @Test
+    public void verifyBreadCrumbs() {
+        driver.get(MOVIE_URL);
+        dismissPopups();
+        NavigationPage nav = new NavigationPage(driver);
+        nav.getBreadcrumbTexts();
+
+        Assert.assertTrue(nav.isBreadcrumbVisible(), "No bread crumbs");
+    }
+
+    @Test
+    public void verifyHomeScreenReturn() {
+        driver.get(MOVIE_URL);
+        dismissPopups();
+        NavigationPage nav = new NavigationPage(driver);
+        Assert.assertTrue(nav.clickHomeLink(), "No homepage link found");
+    }
 }

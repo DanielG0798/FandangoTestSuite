@@ -48,7 +48,7 @@ public class ErrorHandlingTests extends BaseTest {
      * Confirms that the WebDriverWait configuration in BaseTest correctly
      * throws a TimeoutException (rather than hanging indefinitely) when an
      * element that does not exist is waited upon.
-     *
+
      * Pass: TimeoutException is thrown within the configured wait window.
      * Fail: the wait blocks indefinitely, or no exception is thrown.
      */
@@ -117,7 +117,7 @@ public class ErrorHandlingTests extends BaseTest {
      * Simulates a session expiration by clearing all browser cookies and local
      * storage, then reloading the current page. The test verifies that the site
      * recovers gracefully rather than displaying an unhandled error.
-     *
+
      * Pass: after clearing session data and reloading, the Fandango title is
      *       present (the site handles the expired session without crashing).
      * Fail: the page shows an unbranded error after the session is cleared.

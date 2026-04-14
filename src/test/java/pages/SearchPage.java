@@ -38,12 +38,6 @@ public class SearchPage {
             By.xpath("//*[contains(@class,'autocomplete') or contains(@class,'typeahead') or contains(@class,'suggest')]//*[self::li or self::a or self::button]")
     };
 
-    private final By[] searchInputLocators = new By[] {
-            By.cssSelector("input[placeholder*='movie']"),
-            By.xpath("//input[contains(@placeholder,'movie')]"),
-            By.xpath("//input[contains(@name,'search')]")
-    };
-
     public SearchPage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(15));

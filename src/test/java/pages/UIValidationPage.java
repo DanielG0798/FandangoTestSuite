@@ -15,30 +15,16 @@ public class UIValidationPage {
     private final WebDriver driver;
     private final WebDriverWait wait;
 
-    // ── Locators ────────────────────────────────────────────────────────────────
-
-    private final By[] imageLocators = new By[] {
-            By.tagName("img")
-    };
-
-    private final By[] linkLocators = new By[] {
-            By.tagName("a")
-    };
-
     private final By[] buttonLocators = new By[] {
             By.tagName("button"),
             By.cssSelector("a[role='button']"),
             By.cssSelector("input[type='submit']")
     };
 
-    // ── Constructor ─────────────────────────────────────────────────────────────
-
     public UIValidationPage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
-
-    // ── Images ────────────────────────────────────────────────────────────────────
 
     /**
      * Returns the total number of {@code <img>} elements found on the page
@@ -62,30 +48,6 @@ public class UIValidationPage {
             } catch (Exception ignored) {}
         }
         return broken;
-    }
-
-    /**
-     * Returns true when all images on the page have loaded successfully
-     * (i.e. no image has naturalWidth == 0).
-     */
-    public boolean allImagesLoaded() {
-        return getBrokenImageCount() == 0;
-    }
-
-    // ── Links ─────────────────────────────────────────────────────────────────────
-
-    /**
-     * Returns every href value found on the page.
-     */
-    public List<String> getAllLinkHrefs() {
-        List<String> hrefs = new ArrayList<>();
-        for (WebElement anchor : driver.findElements(By.tagName("a"))) {
-            try {
-                String href = anchor.getAttribute("href");
-                if (href != null && !href.isBlank()) hrefs.add(href);
-            } catch (Exception ignored) {}
-        }
-        return hrefs;
     }
 
     /**
@@ -115,8 +77,6 @@ public class UIValidationPage {
         return getObviouslyBrokenLinks().isEmpty();
     }
 
-    // ── Buttons ───────────────────────────────────────────────────────────────────
-
     /**
      * Returns the count of visible buttons that are enabled and clickable.
      */
@@ -131,15 +91,6 @@ public class UIValidationPage {
         }
         return count;
     }
-
-    /**
-     * Returns true when at least one button is visible and enabled.
-     */
-    public boolean hasClickableButtons() {
-        return getClickableButtonCount() > 0;
-    }
-
-    // ── Responsive Layout ─────────────────────────────────────────────────────────
 
     /**
      * Resizes the browser window to {@code width} × {@code height} pixels,
@@ -167,8 +118,6 @@ public class UIValidationPage {
         driver.manage().window().maximize();
     }
 
-    // ── Fonts and Colors ──────────────────────────────────────────────────────────
-
     /**
      * Uses JavaScript to read the computed font-family of the {@code <body>}
      * element. Returns the value as a string (e.g. "Roboto, sans-serif").
@@ -181,14 +130,6 @@ public class UIValidationPage {
         } catch (Exception ignored) {
             return "";
         }
-    }
-
-    /**
-     * Returns true when the body's computed font-family is non-empty,
-     * confirming that a CSS font is applied.
-     */
-    public boolean isFontApplied() {
-        return !getBodyFontFamily().isBlank();
     }
 
     /**

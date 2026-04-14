@@ -326,6 +326,7 @@ public class CheckoutPage {
         try {
             emailField.clear();
             emailField.sendKeys(email);
+            Thread.sleep(1500);
         } catch (Exception e) {
             return false;
         }

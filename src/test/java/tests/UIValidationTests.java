@@ -124,4 +124,5 @@ public class UIValidationTests extends BaseTest {
                 "Found " + brokenLinks.size() + " obviously broken link(s): " + brokenLinks
         );
     }
+
 }
