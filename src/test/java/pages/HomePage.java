@@ -56,11 +56,6 @@ public class HomePage {
             By.xpath("//button[normalize-space()='Go']")
     };
 
-    private final By[] pageHeadingLocators = new By[] {
-            By.tagName("h1"),
-            By.tagName("h2")
-    };
-
     public HomePage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(15));
@@ -72,13 +67,17 @@ public class HomePage {
 
     /**
      * Returns true when the page title contains "Fandango", without
-     * requiring any specific section to be visible. Useful for a quick
-     * title-only assertion.
+     * requiring any specific section to be visible
      */
     public boolean isTitleCorrect() {
         return driver.getTitle().contains("Fandango");
     }
-
+    // 1. Find the first visible search input element from the predefined locators.
+    // 2. Wait for the search input to be visible.
+    // 3. Click on the search input to ensure it is active.
+    // 4. Clear any existing text in the search input.
+    // 5. Send the provided search query to the search input.
+    // 6. If the query does not match the current value of the search input (due to race conditions), use JavaScript to set the value directly.
     public void enterSearchQuery(String query) {
         WebElement searchInput = firstVisible(searchInputLocators)
                 .orElseThrow(() -> new IllegalStateException("Search input was not found on the home page."));
@@ -93,6 +92,9 @@ public class HomePage {
         }
     }
 
+    // 1. Try to find the first clickable search button from the predefined locators.
+    // 2. If a button is found, click it to submit the search.
+    // 3. If no button is found, simulate a keyboard press of Enter in the search input to submit the search.
     public SearchPage submitSearch() {
         Optional<WebElement> submitButton = firstClickable(searchButtonLocators);
         if (submitButton.isPresent()) {
@@ -102,19 +104,6 @@ public class HomePage {
                     .orElseThrow(() -> new IllegalStateException("Search input was not found on the home page."));
             searchInput.sendKeys(Keys.ENTER);
         }
-        return new SearchPage(driver);
-    }
-
-    /**
-     * Clears the search input and immediately submits (empty-string search).
-     */
-    public SearchPage submitEmptySearch() {
-        WebElement searchInput = firstVisible(searchInputLocators)
-                .orElseThrow(() -> new IllegalStateException("Search input was not found on the home page."));
-        wait.until(ExpectedConditions.visibilityOf(searchInput));
-        searchInput.click();
-        searchInput.clear();
-        searchInput.sendKeys(Keys.ENTER);
         return new SearchPage(driver);
     }
 
@@ -129,7 +118,9 @@ public class HomePage {
     public boolean isSignInButtonVisible() {
         return isAnyElementVisible(signInLocators);
     }
-
+    // 1. If a location input is found, click on it and clear any existing text.
+    // 2. Enter the provided zip code into the location input.
+    // 3. Try to find the first clickable submit button from the predefined locators.
     public boolean dismissLocationPopup(String zipCode) {
         Optional<WebElement> locationInput = firstVisible(locationInputLocators);
         if (locationInput.isEmpty()) {
@@ -154,20 +145,6 @@ public class HomePage {
         }
 
         return true;
-    }
-
-    /**
-     * Returns true when the location input is visible, meaning a
-     * location pop-up (or location field) is present on the page.
-     */
-    public boolean isLocationPopupPresent() {
-        return firstVisible(locationInputLocators)
-                .map(el -> {
-                    String placeholder = Optional.ofNullable(el.getAttribute("placeholder"))
-                            .orElse("").toLowerCase();
-                    return !placeholder.contains("movie");
-                })
-                .orElse(false);
     }
 
     private Optional<WebElement> firstVisible(By... locators) {

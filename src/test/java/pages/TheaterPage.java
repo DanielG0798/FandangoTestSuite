@@ -75,6 +75,10 @@ public class TheaterPage {
         }
     }
 
+    /**
+     * Selects the first theater from a list of candidates.
+     * @return true if a theater was selected, false otherwise.
+     */
     public boolean selectFirstTheater() {
         for (WebElement element : theaterCandidates()) {
             String currentUrl = driver.getCurrentUrl();
@@ -115,7 +119,10 @@ public class TheaterPage {
     public boolean isMapDisplayed() {
         return isAnyElementVisible(mapLocators);
     }
-
+    /**
+     * Attempts to filter showtimes by clicking on a button or link containing the specified label.
+     * The method returns true if the filtering was successful or if the selected showtime changed.
+     */
     public boolean filterByShowtime(String label) {
         String selectedBefore = getSelectedDateLabel();
         By optionLocator = By.xpath("//button[contains(normalize-space(),'" + label + "') or contains(@aria-label,'" + label + "')]" +
@@ -138,7 +145,11 @@ public class TheaterPage {
                 || !selectedAfter.equals(selectedBefore)
                 || driver.getPageSource().toLowerCase(Locale.ROOT).contains(label.toLowerCase(Locale.ROOT));
     }
-
+/**
+* The method uses an XPath expression to locate elements that might indicate the selected date,
+* such as buttons with specific attributes or classes. It then iterates through these elements,
+* checks if they are displayed, and returns the label or text of the first element that meets the criteria.
+* */
     public String getSelectedDateLabel() {
         By selectedLocator = By.xpath("//button[@aria-selected='true' or @aria-pressed='true' or " +
                 "contains(@aria-label,'selected') or contains(@class,'selected')]");
@@ -162,6 +173,11 @@ public class TheaterPage {
         return "";
     }
 
+    /**
+     * Searches for all <a> and <button> elements on the page, filters out those that are not displayed,
+     * and checks if the text matches a pattern indicating it might be a theater name.
+     * It collects all matching elements in a list and returns them.
+     */
     private List<WebElement> theaterCandidates() {
         List<WebElement> candidates = new ArrayList<>();
         List<WebElement> elements = driver.findElements(By.xpath("//a | //button"));

@@ -59,6 +59,11 @@ public class SearchPage {
         return !visibleElements(movieResultLinks).isEmpty();
     }
 
+    /**
+     * Retrieves a list of auto-suggestions from the search page.
+     *
+     * @return A list of unique, displayed auto-suggestions.
+     */
     public List<String> getAutoSuggestions() {
         Set<String> suggestions = new LinkedHashSet<>();
         for (By locator : suggestionLocators) {

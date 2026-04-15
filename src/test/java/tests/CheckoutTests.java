@@ -89,7 +89,7 @@ public class CheckoutTests extends BaseTest {
         boolean guestVisible = checkout.isGuestCheckoutOptionVisible();
 
         if (!guestVisible) {
-            System.out.println("[INFO] Guest checkout option was not found. " +
+            System.out.println("Guest checkout option was not found. " +
                     "The site may require a signed-in session at this stage. " +
                     "URL: " + driver.getCurrentUrl());
         }
@@ -126,7 +126,7 @@ public class CheckoutTests extends BaseTest {
 
         // Enter guest e-mail and submit the guest form to proceed to payment
         boolean guestFormSubmitted = checkout.enterGuestEmailAndContinue(GUEST_EMAIL);
-        System.out.println("[INFO] Guest form submitted: " + guestFormSubmitted +
+        System.out.println("Guest form submitted: " + guestFormSubmitted +
                 " | URL: " + driver.getCurrentUrl());
 
         // Assert on actual payment inputs — not a generic form element

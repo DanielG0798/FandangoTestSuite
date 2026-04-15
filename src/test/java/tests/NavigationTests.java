@@ -120,7 +120,7 @@ public class NavigationTests extends BaseTest {
         boolean hasBreadcrumbs = nav.isBreadcrumbVisible();
 
         if (!hasBreadcrumbs) {
-            System.out.println("[INFO] No breadcrumb element found on the movie-overview page. " +
+            System.out.println("No breadcrumb element found on the movie-overview page. " +
                     "This may be expected for the current page template.");
         }
 

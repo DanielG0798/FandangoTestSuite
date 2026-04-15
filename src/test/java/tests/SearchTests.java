@@ -45,6 +45,7 @@ public class SearchTests extends BaseTest {
 
     @Test
     public void verifyAutoSuggestions() throws InterruptedException {
+        // Verify that auto-suggestions appear when typing a partial query.
         HomePage homePage = new HomePage(driver);
         homePage.enterSearchQuery("Mari");
         Thread.sleep(2000);
@@ -67,6 +68,7 @@ public class SearchTests extends BaseTest {
 
     @Test
     public void verifySearchResultsPageLoads() {
+        // Verify that the search results page loads correctly.
         HomePage homePage = new HomePage(driver);
         homePage.enterSearchQuery(VALID_MOVIE_QUERY);
 

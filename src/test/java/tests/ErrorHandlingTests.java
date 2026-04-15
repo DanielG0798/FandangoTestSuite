@@ -47,7 +47,7 @@ public class ErrorHandlingTests extends BaseTest {
      * throws a TimeoutException (rather than hanging indefinitely) when an
      * element that does not exist is waited upon.
 
-     * Pass: TimeoutException is thrown within the configured wait window.
+     * Pass: TimeoutException is thrown within the wait window.
      * Fail: the wait blocks indefinitely, or no exception is thrown.
      */
     @Test
@@ -156,7 +156,7 @@ public class ErrorHandlingTests extends BaseTest {
     @Test
     public void handlePopupInterruptions() {
         // The BaseTest @BeforeMethod already calls dismissPopups() once;
-        // call it again to simulate a second popup appearing mid-session.
+        // it is called again to simulate a second popup appearing mid-session.
         dismissPopups();
 
         HomePage homePage = new HomePage(driver);

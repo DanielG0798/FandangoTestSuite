@@ -24,7 +24,7 @@ public class UIValidationTests extends BaseTest {
                 fontFamily.isBlank(),
                 "Body font-family was blank — stylesheet may not have loaded."
         );
-        System.out.println("[INFO] Body font-family: " + fontFamily);
+        System.out.println("Body font-family: " + fontFamily);
 
         Assert.assertTrue(
                 ui.isBackgroundColorApplied(),
@@ -79,7 +79,7 @@ public class UIValidationTests extends BaseTest {
 
     /**
      * Checks every {@code <img>} element on the page and counts those whose
-     * {@code naturalWidth} is 0 (i.e. failed to load). The test asserts that
+     * {@code naturalWidth} is 0 (failed to load). The test asserts that
      * zero images have failed to load.
      * Pass: all images have loaded (no broken images found).
      * Fail: one or more images have naturalWidth == 0.
@@ -91,7 +91,7 @@ public class UIValidationTests extends BaseTest {
         int totalImages  = ui.getTotalImageCount();
         int brokenImages = ui.getBrokenImageCount();
 
-        System.out.println("[INFO] Total images: " + totalImages +
+        System.out.println("Total images: " + totalImages +
                 " | Broken: " + brokenImages);
 
         Assert.assertEquals(
@@ -115,7 +115,7 @@ public class UIValidationTests extends BaseTest {
         var brokenLinks = ui.getObviouslyBrokenLinks();
 
         if (!brokenLinks.isEmpty()) {
-            System.out.println("[INFO] Broken link candidates found:");
+            System.out.println("Broken link candidates found:");
             brokenLinks.forEach(link -> System.out.println("  " + link));
         }
 
