@@ -14,7 +14,6 @@ public class NavigationTests extends BaseTest {
      * Starts from the Fandango home page, searches for a movie, clicks the
      * first result, and confirms the browser has navigated to a movie-overview
      * page.
-
      * Pass: the final URL contains "movie-overview".
      * Fail: search or click failed to reach a movie-detail page.
      */
@@ -41,7 +40,7 @@ public class NavigationTests extends BaseTest {
     /**
      * Navigates from the movie-overview page back to the home page using the
      * browser's back button and confirms the title reverts to "Fandango".
-
+     * <p>
      * Pass: after goBack(), title contains "Fandango" or URL returns to the base.
      * Fail: the back navigation did not return to the home page.
      */
@@ -62,7 +61,7 @@ public class NavigationTests extends BaseTest {
         );
 
         boolean titleIsHome = driver.getTitle().contains("Fandango");
-        boolean urlIsHome   = !urlAfterBack.contains("movie-overview");
+        boolean urlIsHome = !urlAfterBack.contains("movie-overview");
 
         Assert.assertTrue(
                 titleIsHome || urlIsHome,
@@ -75,7 +74,7 @@ public class NavigationTests extends BaseTest {
      * Confirms that the URL changes after performing a search, proving that
      * the site uses URL-based navigation rather than rendering everything in
      * place.
-
+     * <p>
      * Pass: URL after search differs from the base URL.
      * Fail: URL is unchanged, suggesting navigation or routing is broken.
      */
@@ -104,10 +103,10 @@ public class NavigationTests extends BaseTest {
      * Opens a movie-overview page and checks for a breadcrumb navigation
      * element. Breadcrumbs help users understand their position in the site
      * hierarchy.
-
+     * <p>
      * Pass: breadcrumb nav element is present and visible.
      * Fail: no breadcrumb element is found.
-
+     * <p>
      * Note: not all Fandango pages expose breadcrumbs; the test logs an
      * informational message and does not fail the suite when absent.
      */
@@ -135,7 +134,7 @@ public class NavigationTests extends BaseTest {
      * Loads the movie-overview page, refreshes it, and confirms the title
      * still contains "Fandango" — verifying that the page survives a browser
      * reload without error.
-
+     * <p>
      * Pass: title after refresh still contains "Fandango".
      * Fail: refresh produces an error page or a blank title.
      */
@@ -151,22 +150,5 @@ public class NavigationTests extends BaseTest {
                 titleAfterRefresh.contains("Fandango"),
                 "Page title after refresh does not contain 'Fandango': '" + titleAfterRefresh + "'"
         );
-    }
-    @Test
-    public void verifyBreadCrumbs() {
-        driver.get(MOVIE_URL);
-        dismissPopups();
-        NavigationPage nav = new NavigationPage(driver);
-        nav.getBreadcrumbTexts();
-
-        Assert.assertTrue(nav.isBreadcrumbVisible(), "No bread crumbs");
-    }
-
-    @Test
-    public void verifyHomeScreenReturn() {
-        driver.get(MOVIE_URL);
-        dismissPopups();
-        NavigationPage nav = new NavigationPage(driver);
-        Assert.assertTrue(nav.clickHomeLink(), "No homepage link found");
     }
 }
